@@ -1,0 +1,66 @@
+<div class="col-md-12">
+  <button type="button" class="btn btn-primary pull-right" (click)="openModal(template);">New Post</button>
+</div>
+<div class="clearfix"></div>
+<br/>
+<div class="col-md-12">
+  <table class="table table-bordered table-striped">
+  <thead>
+  <tr>
+    <th>Sr</th>
+    <th>Title</th>
+    <th>Description</th>
+    <th>Created By</th>
+    <th>Created At</th>
+    <th>Updated At</th>
+    <th>Actions</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let post of posts;let i = index">
+    <td>{{i + 1}}</td>
+    <td>{{post.title}}</td>
+    <td>{{post.description}}</td>
+    <td>{{post.created_by}}</td>
+    <td>{{post.created_at}}</td>
+    <td>{{post.updated_at}}</td>
+    <td>
+      <div class="btn-group" role="group">
+        <a (click)="openEditModal(template, post)" class="btn btn-info">
+          <i class="glyphicon glyphicon-pencil"></i>
+        </a>
+        <a (click)="deletePost(post)" class="btn btn-danger">
+          <i class="glyphicon glyphicon-remove-sign"></i>
+        </a>
+      </div>
+    </td>
+  </tr>
+  </tbody>
+</table>
+</div>
+<ng-template #template>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">{{postFormObj.id == undefined ? 'New' : 'Edit'}} Post</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form #postForm="ngForm" (ngSubmit)="sendRequest()">
+      <div class="form-group">
+        <label for="title">Title</label>
+        <input [(ngModel)]="postFormObj.title" name="title" class="form-control" id="title" required>
+      </div>
+      <div class="form-group">
+        <label for="description">Description</label>
+        <textarea [(ngModel)]="postFormObj.description" name="description" id="description" class="form-control" required></textarea>
+      </div>
+      <div class="form-group">
+        <label for="createdBy">Created By</label>
+        <input [(ngModel)]="postFormObj.created_by" name="createdBy" id="createdBy" class="form-control" required>
+        <p class="help-block">Your Name here.</p>
+      </div>
+      <button type="submit" class="btn btn-info" [disabled]="!postForm.form.valid">{{postFormObj.id == undefined ? 'Create' : 'Update'}} Post</button>
+    </form>
+  </div>
+</ng-template>
