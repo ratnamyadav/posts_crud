@@ -1,24 +1,11 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+* Update database.yml to use your computer postgres credentials.
 
-Things you may want to cover:
+* Use Ruby 2.4.1 and then do bundle install
 
-* Ruby version
+* After that do rake db:create db:migrate
 
-* System dependencies
+* Now you can run server using rails s.
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+* To run tests you can use rspec command
